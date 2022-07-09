@@ -1,0 +1,5 @@
+URL01: https://github.com/mikewahley/Project3_solution
+URL02: http://udapeople-8ca014d.s3-website-us-east-1.amazonaws.com
+URL03: http://d33ziwn62jd2mo.cloudfront.net
+URL04: http://ec2-18-234-100-60.compute-1.amazonaws.com:3030 (http://18.234.100.60:3030)
+URL05: http://ec2-3-87-190-160.compute-1.amazonaws.com:9090
