@@ -16,22 +16,22 @@ commands:
             aws cloudformation delete-stack --stack-name udapeople-frontend-<< parameters.workflow_id >>
   
   revert-migrations:
-      description: Revert the last migration if successfully run in the current workflow.
-      parameters:
-        workflow_id:
-            type: string  
-      steps:
-        - run:
-            name: Revert migrations
-            when: on_fail
-            command: |
-              SUCCESS=$(curl -insecure https://kvdb.io/JpUJwnuu9s5YyfKtGLo7G9/migration_<< parameters.workflow_id >>)
-              # Logic for reverting the database state
-              if (( $SUCCESS == 1 ));
-              then
-                  cd ~/project/backend
-                  #npm install
-                  npm run migration:revert
+    description: Revert the last migration if successfully run in the current workflow.
+    parameters:
+      workflow_id:
+        type: string   
+    steps:
+      - run:
+          name: Revert migrations
+          when: on_fail
+          command: |
+            SUCCESS=$(curl https://keyvalue.immanuel.co/api/KeyVal/GetValue/3cg7aby9/migration_<< parameters.workflow_id >>)
+            echo $SUCCESS
+            if [[ "$SUCCESS" == 1 ]]
+            then
+              cd backend
+              npm install
+              npm run migration:revert
             fi
 
 jobs:
