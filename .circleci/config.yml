@@ -205,8 +205,6 @@ jobs:
           name: Run migrations
           no_output_timeout: 20m
           command: |
-            sudo apt update
-            sudo apt install -y awscli
             cd backend
             npm install
             # npm audit fix --audit-level=critical --force
@@ -215,11 +213,12 @@ jobs:
             npm run migrations > ~/project/backend/migrations_dump.txt
             cat ~/project/backend/migrations_dump.txt
       - run:
-          name: Send migration results to memstash
+          name: Send migration results to kvdb
           command: |
             if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
             then
-                curl --header "content-length:0" -X POST https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/3cg7aby9/migration_${CIRCLE_WORKFLOW_ID:0:7}/1
+                curl -k https://kvdb.io/JpUJwnuu9s5YyfKtGLo7G9 -d 'SUCCESS' 
+                echo "WorkflowID=${CIRCLE_WORKFLOW_ID:0:7}/1"
             fi
       - persist_to_workspace:
           root: ~/
