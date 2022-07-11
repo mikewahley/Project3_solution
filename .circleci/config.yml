@@ -203,6 +203,7 @@ jobs:
           keys: [backend-build]
       - run:
           name: Run migrations
+          no_output_timeout: 20m
           command: |
             sudo apt update
             sudo apt install -y awscli
