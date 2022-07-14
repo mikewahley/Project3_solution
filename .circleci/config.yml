@@ -124,10 +124,10 @@ jobs:
             npm audit fix --force
             npm audit --audit-level=critical
             
-  deploy-infrastructure:
-    docker:
-      - image: amazon/aws-cli
-    steps:
+ # deploy-infrastructure:
+  #  docker:
+   #   - image: amazon/aws-cli
+    #steps:
       - checkout
       - run: yum install -y tar gzip
       - run:
