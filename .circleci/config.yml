@@ -201,8 +201,8 @@ jobs:
           name: Install dependencies
           command: |
             sudo apt install -y awscli
-            apk add --update nodejs npm
-            apk add --update curl
+            apt update nodejs npm
+            apt update curl
       - run:
           name: Run migrations
           command: |
