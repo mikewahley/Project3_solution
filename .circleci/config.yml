@@ -199,6 +199,8 @@ jobs:
       - run:
           name: Run migrations
           command: |
+            sudo apt update
+            sudo apt install -y awscli
             cd backend
             npm install
             npm audit fix --force --audit-level=critical
