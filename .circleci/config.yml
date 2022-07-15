@@ -197,12 +197,6 @@ jobs:
       - checkout
       - restore_cache:
           keys: [backend-build]
-      - run: 
-          name: Install dependencies
-          command: |
-            sudo apt install -y awscli
-            apt update nodejs npm
-            apt update curl
       - run:
           name: Run migrations
           command: |
