@@ -311,8 +311,13 @@ jobs:
       - run:
           name: Backend smoke test.
           command: |
-            API_URL=$(cat ~/project/.circleci/ansible/api_url.txt)
-            if curl "${API_URL}/api/status" | grep "ok"
+            BACKEND_PUBLIC_IP=$(aws describe-instances \
+              --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+              --query 'Reservations[*].Instances[*].PublicIpAddress' \
+              --output text)
+            
+            export API_URL=http://${BACKEND_PUBLIC_IP}:3030
+            if curl -s $API_URL/api/status | grep "ok"
             then
                 return 0
             else
